@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSfx } from "@/hooks/use-sfx";
+import { CONTENT } from "@/PUT-YOUR-CONTENT-HERE/content";
 
 interface MailboxOverlayProps {
   onClose: () => void;
@@ -8,14 +9,9 @@ interface MailboxOverlayProps {
 
 type Step = "envelope" | "letter";
 
-const LETTER_TEXT =
-  "FELICIDADES BBY!!\n\nGracias por formar parte de mi vida y hacer que cada dia sea un poco mas especial. Espero que cumplas muchos años más a mi lado.\n\nWith love, Alex";
-
 const MailboxOverlay = ({ onClose }: MailboxOverlayProps) => {
   const [step, setStep] = useState<Step>("envelope");
   const { playTear } = useSfx();
-
-  const handleClose = onClose;
 
   return (
     <motion.div
@@ -23,7 +19,7 @@ const MailboxOverlay = ({ onClose }: MailboxOverlayProps) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={handleClose}
+      onClick={onClose}
     >
       <motion.div
         className="relative"
@@ -38,7 +34,7 @@ const MailboxOverlay = ({ onClose }: MailboxOverlayProps) => {
             <EnvelopeStep key="envelope" onOpen={() => { playTear(); setStep("letter"); }} />
           )}
           {step === "letter" && (
-            <LetterStep key="letter" onClose={handleClose} />
+            <LetterStep key="letter" onClose={onClose} />
           )}
         </AnimatePresence>
       </motion.div>
@@ -105,7 +101,7 @@ const LetterStep = ({ onClose }: { onClose: () => void }) => {
       >
         <p className="text-3xl sm:text-4xl mb-3 sm:mb-4">💌</p>
         <div className="font-handwritten text-lg sm:text-xl leading-relaxed text-foreground whitespace-pre-line text-left px-1 sm:px-2 max-h-[60vh] overflow-y-auto">
-          {LETTER_TEXT}
+          {CONTENT.letterText}
         </div>
       </motion.div>
     </motion.div>

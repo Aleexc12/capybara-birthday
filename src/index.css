@@ -12,9 +12,6 @@
     --card: 0 0% 100%;
     --card-foreground: 340 30% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 340 30% 25%;
-
     --primary: 340 60% 72%;
     --primary-foreground: 0 0% 100%;
 
@@ -27,21 +24,14 @@
     --accent: 25 70% 85%;
     --accent-foreground: 25 50% 30%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
     --border: 340 30% 88%;
     --input: 340 30% 88%;
     --ring: 340 60% 72%;
 
     --radius: 1.25rem;
 
-    --kawaii-mint: 160 40% 85%;
-    --kawaii-mint-foreground: 160 30% 30%;
     --kawaii-peach: 25 70% 85%;
-    --kawaii-lavender: 270 40% 85%;
     --kawaii-cream: 40 50% 95%;
-    --kawaii-blush: 350 50% 90%;
 
   }
 }
@@ -61,20 +51,9 @@
     @apply bg-card rounded-3xl shadow-lg border border-border p-8;
   }
 
-  .kawaii-button {
-    @apply rounded-full px-8 py-3 font-semibold text-primary-foreground bg-primary 
-           hover:brightness-105 transition-all duration-300 shadow-md
-           hover:shadow-lg hover:scale-105 active:scale-95;
-  }
-
   .kawaii-button-secondary {
     @apply rounded-full px-8 py-3 font-semibold bg-secondary text-secondary-foreground
            hover:brightness-105 transition-all duration-300 shadow-md
            hover:shadow-lg hover:scale-105 active:scale-95;
   }
-
-  .handwritten {
-    font-family: 'Caveat', cursive;
-  }
-
 }

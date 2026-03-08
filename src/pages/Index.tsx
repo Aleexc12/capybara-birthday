@@ -5,18 +5,11 @@ import sleepingImg from "@/assets/sleeping.png";
 import TypewriterDialogue from "@/components/TypewriterDialogue";
 import BackButton from "@/components/BackButton";
 import { useSfx } from "@/hooks/use-sfx";
+import { CONTENT } from "@/PUT-YOUR-CONTENT-HERE/content";
 
 type Phase = "sleeping" | "grumpy" | "dialogue";
-
-const DIALOGUE_LINES = [
-  "WAIT...",
-  "Are we already in that day ??",
-  "YES, YES, YES!! It's your BIRTHDAY !!",
-  "That means ... another year of us being adorable",
-  "Wanna see what this year together looked like?",
-];
-
-const GRUMPY_TEXT = "what do you want, let me sleep";
+const GRUMPY_TEXT = CONTENT.firstBubbleText;
+const DIALOGUE_LINES = CONTENT.introLines;
 
 const Index = () => {
   const location = useLocation();

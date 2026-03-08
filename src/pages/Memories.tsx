@@ -2,45 +2,28 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BackButton from "@/components/BackButton";
 import { useSfx } from "@/hooks/use-sfx";
+import { CONTENT } from "@/PUT-YOUR-CONTENT-HERE/content";
 
 const MEMORY_IMAGE_MODULES = import.meta.glob(
-  "../assets/memories/*.{png,jpg,jpeg,webp,avif}",
+  "../PUT-YOUR-CONTENT-HERE/memories/*.{png,jpg,jpeg,webp,avif}",
   {
     eager: true,
     import: "default",
   },
 );
 
-const MEMORY_IMAGES = Object.entries(MEMORY_IMAGE_MODULES)
-  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-  .map(([, src]) => src as string);
+const MEMORY_IMAGES_BY_FILE: Record<string, string> = Object.entries(MEMORY_IMAGE_MODULES)
+  .reduce<Record<string, string>>((acc, [path, src]) => {
+    const fileName = path.split("/").pop() ?? path;
+    acc[fileName] = src as string;
+    return acc;
+  }, {});
 
-const DEFAULT_CAPTIONS = [
-  "day 1",
-  "yummy",
-  "hammering",
-  "matching rings",
-  "us",
-  "qiqihari",
-  'photoshoot',
-  'simba',
-  'jeje'
-];
-
-type Polaroid = {
-  id: number;
-  rotation: number;
-  caption: string;
-  src: string | null;
-};
-
-const POLAROIDS: Polaroid[] = (
-  MEMORY_IMAGES.length > 0 ? MEMORY_IMAGES : Array.from({ length: 6 }, () => null)
-).map((src, i) => ({
+const POLAROIDS = CONTENT.memories.map((memory, i) => ({
   id: i,
-  src,
+  src: MEMORY_IMAGES_BY_FILE[memory.fileName] ?? null,
   rotation: (Math.random() - 0.5) * 12,
-  caption: DEFAULT_CAPTIONS[i] ?? `memory ${i + 1}`,
+  caption: memory.caption || memory.fileName.replace(/\.[^/.]+$/, ""),
 }));
 
 const Memories = () => {

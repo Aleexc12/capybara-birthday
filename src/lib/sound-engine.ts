@@ -1,14 +1,14 @@
 let audioContext: AudioContext | null = null;
 const bufferCache = new Map<string, AudioBuffer>();
 
-export function getAudioContext(): AudioContext {
+function getAudioContext(): AudioContext {
   if (!audioContext) {
     audioContext = new AudioContext();
   }
   return audioContext;
 }
 
-export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
+async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
   const cached = bufferCache.get(dataUri);
   if (cached) return cached;
 
@@ -25,21 +25,16 @@ export async function decodeAudioData(dataUri: string): Promise<AudioBuffer> {
   return audioBuffer;
 }
 
-export interface PlaySoundOptions {
+interface PlaySoundOptions {
   volume?: number;
   playbackRate?: number;
-  onEnd?: () => void;
-}
-
-export interface SoundPlayback {
-  stop: () => void;
 }
 
 export async function playSound(
   dataUri: string,
   options: PlaySoundOptions = {}
-): Promise<SoundPlayback> {
-  const { volume = 1, playbackRate = 1, onEnd } = options;
+): Promise<void> {
+  const { volume = 1, playbackRate = 1 } = options;
   const ctx = getAudioContext();
   if (ctx.state === "suspended") {
     await ctx.resume();
@@ -56,19 +51,5 @@ export async function playSound(
   source.connect(gain);
   gain.connect(ctx.destination);
 
-  source.onended = () => {
-    onEnd?.();
-  };
-
   source.start(0);
-
-  return {
-    stop: () => {
-      try {
-        source.stop();
-      } catch {
-        // No-op if already stopped.
-      }
-    },
-  };
 }
