@@ -1,4 +1,4 @@
-# Birthday Hugs
+# Capybara Birthday
 
 An interactive birthday greeting web app where a capybara guides the user through a small surprise flow: wake-up intro, phone-style hub, memories gallery, and birthday letter.
 
@@ -40,9 +40,7 @@ You only need these two places:
 - `src/PUT-YOUR-CONTENT-HERE/content.ts`
 - `src/PUT-YOUR-CONTENT-HERE/memories/`
 
-Recommended for most users: only change `letterText` and memory `caption` values.
-
-### 1) Edit texts + captions in one file
+### 1) Edit texts + captions
 
 - File: `src/PUT-YOUR-CONTENT-HERE/content.ts`
 - Recommended:
@@ -59,8 +57,7 @@ Tip: use `\n` in `letterText` to add line breaks.
 - Folder: `src/PUT-YOUR-CONTENT-HERE/memories/`
 - Put your images here.
 - Supported formats: `png`, `jpg`, `jpeg`, `webp`, `avif`.
-- Important: each `fileName` in `content.ts` must match the real image file name exactly.
-- If you only want to change captions, do not change `fileName`.
+- Important: each `fileName` in `content.ts` must match the real image file name exactly..
 
 Example memory entry:
 
